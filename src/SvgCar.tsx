@@ -29,7 +29,11 @@ export default function SvgMarker({
   };
 
   if (svgSource.startsWith("<svg")) {
-    const buff = Buffer.from(svgSource);
+    const parser = new DOMParser(),
+      svg = parser.parseFromString(svgSource, "image/svg+xml"),
+      buff = Buffer.from(svgSource);
+
+    debugger;
     return <img src={`data:image/svg+xml;base64,${buff.toString("base64")}`} />;
   }
 
