@@ -28,5 +28,7 @@ export default function SvgMarker({
     },
   };
 
-  return <ReactSVG {...svgProps} />;
+  if (svgSource.startsWith("<svg"))
+    return <img src={`data:image/svg+xml;utf8,${svgSource}`} />;
+  else return <ReactSVG {...svgProps} />;
 }
