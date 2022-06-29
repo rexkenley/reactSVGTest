@@ -28,7 +28,10 @@ export default function SvgMarker({
     },
   };
 
-  if (svgSource.startsWith("<svg"))
-    return <img src={`data:image/svg+xml;utf8,${svgSource}`} />;
-  else return <ReactSVG {...svgProps} />;
+  if (svgSource.startsWith("<svg")) {
+    const buff = Buffer.from(svgSource);
+    return <img src={`data:image/svg+xml;base64,${buff.toString("base64")}`} />;
+  }
+
+  return <ReactSVG {...svgProps} />;
 }
